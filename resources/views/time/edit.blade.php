@@ -11,9 +11,9 @@
     <title>Time Tracker</title>
   </head>
   <body>
-    <h1>Time Entries</h1>
+    <h1>Edit Entry</h1>
     
-    @if ($errors->any())
+        @if ($errors->any())
         <div class="alert alert-danger">
             <strong>Whoops!</strong> There were some problems with your input.<br><br>
             <ul>
@@ -23,7 +23,8 @@
             </ul>
         </div>
     @endif
-        
+
+    
     <table class="table">
   <thead>
     <tr>
@@ -39,40 +40,22 @@
     </tr>
   </thead>
   <tbody>
-	  <form action="{{ route('time.store') }}" method="POST">
+	  <form action="{{ route('time.update', $time->id) }}" method="POST">
 		@csrf
+		@method('PUT')
 			<tr>
-			  <th scope="row">[#]</th>
-			  <td><input type="text" name="date" class="form-control" placeholder="Date"></td>
-			  <td><input type="text" name="project" class="form-control" placeholder="Project"></td>
-			  <td><input type="text" name="description" class="form-control" placeholder="Description"></td>
-			  <td><input type="text" name="timestart" class="form-control" placeholder="Start Time"></td>
-			  <td><input type="text" name="timeend" class="form-control" placeholder="End Time"></td>
+			  <th scope="row">{{ $time->id }}</th>
+			  <td><input type="text" name="date" class="form-control" placeholder="Date" value="{{ $time->date }}"></td>
+			  <td><input type="text" name="project" class="form-control" placeholder="Project" value="{{ $time->project }}"></td>
+			  <td><input type="text" name="description" class="form-control" placeholder="Description" value="{{ $time->description }}"></td>
+			  <td><input type="text" name="timestart" class="form-control" placeholder="Start Time" value="{{ $time->timestart }}"></td>
+			  <td><input type="text" name="timeend" class="form-control" placeholder="End Time" value="{{ $time->timeend }}"></td>
 			  <td></td>
-			  <td><button type="submit" class="btn btn-primary">Add</button></td>
+			  <td><button type="submit" class="btn btn-primary">Update</button></td>
 			  <td></td>
 			</tr>
 		</form>
 	  
-	  @foreach($timesheets as $time) 
-	  
-	 <tr>
-      <th scope="row">{{ $time->id }}</th>
-      <td>{{ $time->date }}</td>
-      <td>{{ $time->project }}</td>
-      <td>{{ $time->description }}</td>
-      <td>{{ $time->timestart }}</td>
-      <td>{{ $time->timeend }}</td>
-      <td><a class="btn btn-primary" href="{{ route('time.edit',$time->id) }}">E</a></td>
-      <td><form action="{{ route('time.destroy',$time->id) }}" method="POST">
-			  @csrf
-			  @method('DELETE')
-		  
-			  <button type="submit" class="btn btn-danger">D</button>
-          </form>
-       </td>
-    </tr>
-	  @endforeach
 	  
   </tbody>
   </table>

@@ -59,9 +59,9 @@ class TimeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Timesheet $time)
     {
-        //
+		return view('time.edit',compact('time'));
     }
 
     /**
@@ -71,9 +71,20 @@ class TimeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Timesheet $time)
     {
-        //
+        $request->validate([
+			'date' 		=> 'required', 
+			'timestart' => 'required', 
+			'timeend'   => 'required', 
+			'project'	=> 'required', 
+			'description'=> 'required',
+            
+        ]);
+  
+        $time->update($request->all());
+  
+        return redirect()->route('time.index');
     }
 
     /**
@@ -82,8 +93,10 @@ class TimeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Timesheet $time)
     {
-        //
+        $time->delete();
+  
+        return redirect()->route('time.index');
     }
 }
