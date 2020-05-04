@@ -9,6 +9,11 @@ You can:
 2. Edit a time entry
 3. Delete a time entry
 
+<div align="center">
+
+<img src="https://github.com/my443/time-tracker-laravel/blob/master/img/Screenshot1.png" alt="Screenshot #1"><br>
+
+</div>
 
 ## Technical Information
 
@@ -24,8 +29,4 @@ You can:
 1. If you enter a time entry without filling out all fo the fields it will through an error. (Connected to TODO #1)
 
 
-<div align="center">
 
-<img src="https://github.com/my443/time-tracker-laravel/blob/master/img/Screenshot1.png" alt="Screenshot #1"><br>
-
-</div>
